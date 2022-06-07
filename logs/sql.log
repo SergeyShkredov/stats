@@ -1,0 +1,50 @@
+31 мая 2022 23:25:29,617 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 55: no private connection found
+31 мая 2022 23:25:29,619 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 72: no private connection found
+31 мая 2022 23:25:29,621 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 63: no private connection found
+31 мая 2022 23:25:29,621 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 53: no private connection found
+31 мая 2022 23:29:14,585 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 51: no private connection found
+31 мая 2022 23:34:40,057 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 54: no private connection found
+31 мая 2022 23:34:40,059 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 61: no private connection found
+31 мая 2022 23:34:40,060 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 67: no private connection found
+31 мая 2022 23:34:55,683 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 91: no private connection found
+31 мая 2022 23:34:55,684 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 54: no private connection found
+31 мая 2022 23:34:55,685 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 90: no private connection found
+31 мая 2022 23:34:55,689 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 67: no private connection found
+31 мая 2022 23:59:38,509 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 55: no private connection found
+31 мая 2022 23:59:38,521 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 58: no private connection found
+31 мая 2022 23:59:38,522 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 53: no private connection found
+31 мая 2022 23:59:38,523 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 59: no private connection found
+01 июн. 2022 00:20:58,749 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 56: no private connection found
+01 июн. 2022 00:20:58,759 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 55: no private connection found
+01 июн. 2022 00:20:58,765 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 60: no private connection found
+01 июн. 2022 00:20:58,766 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 81: no private connection found
+01 июн. 2022 10:52:47,000 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 53: no private connection found
+01 июн. 2022 10:52:47,015 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 61: no private connection found
+01 июн. 2022 11:49:47,418 system - system - system ERROR SQLLogger - org.postgresql.jdbc.PgStatement@5167268 ОШИБКА: столбец "_deleted_main_tournament_team" отношения "_auto_main_team" уже существует
+01 июн. 2022 11:57:43,483 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 55: no private connection found
+01 июн. 2022 14:17:59,108 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 54: no private connection found
+01 июн. 2022 14:17:59,112 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 72: no private connection found
+01 июн. 2022 14:17:59,114 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 55: no private connection found
+01 июн. 2022 16:08:53,330 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 67: no private connection found
+01 июн. 2022 16:08:53,331 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 59: no private connection found
+01 июн. 2022 18:04:18,526 system - 127.0.0.1 - 127.0.0.1  INFO SQLLogger - REMOVE UNUSED TEMP TABLE : t_25, DEBUG INFO : upktable-276224486
+01 июн. 2022 18:04:18,533 system - 127.0.0.1 - 127.0.0.1  INFO SQLLogger - REMOVE UNUSED TEMP TABLE : t_3, DEBUG INFO : upktable-276224486
+01 июн. 2022 18:18:34,056 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 54: no private connection found
+01 июн. 2022 18:18:34,057 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 61: no private connection found
+03 июн. 2022 11:06:55,670 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 53: no private connection found
+03 июн. 2022 11:12:48,733 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 59: no private connection found
+03 июн. 2022 11:12:48,735 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 54: no private connection found
+03 июн. 2022 11:12:48,737 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 62: no private connection found
+03 июн. 2022 11:30:31,117 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 64: no private connection found
+03 июн. 2022 11:30:31,139 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 53: no private connection found
+03 июн. 2022 12:36:45,849 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 58: no private connection found
+03 июн. 2022 12:36:45,853 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 61: no private connection found
+03 июн. 2022 12:38:52,961 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 53: no private connection found
+03 июн. 2022 12:38:52,964 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 57: no private connection found
+03 июн. 2022 12:38:52,965 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 58: no private connection found
+03 июн. 2022 12:38:52,966 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 54: no private connection found
+03 июн. 2022 15:10:14,422 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 66: no private connection found
+03 июн. 2022 15:10:14,424 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 61: no private connection found
+03 июн. 2022 15:10:14,425 system - 127.0.0.1 - 127.0.0.1 ERROR SQLLogger - Failed to interrupt process 54: no private connection found
+03 июн. 2022 23:30:45,185 system - 127.0.0.1 - 127.0.0.1  INFO SQLLogger - REMOVE UNUSED TEMP TABLE : t_2, DEBUG INFO : upktable-1874986686
+03 июн. 2022 23:30:45,187 system - 127.0.0.1 - 127.0.0.1  INFO SQLLogger - REMOVE UNUSED TEMP TABLE : t_1, DEBUG INFO : upktable-1874986686

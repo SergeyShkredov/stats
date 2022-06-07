@@ -1,0 +1,171 @@
+MODULE Main;
+
+// logic description: https://documentation.lsfusion.org/pages/viewpage.action?pageId=2228240
+REQUIRE System, Utils;
+
+CLASS Team 'Team';
+
+name 'Team name' = DATA STRING[30] (Team) IN base;
+
+CLASS Game 'Game';
+
+CLASS Player 'Player';
+
+playerName 'Player name' = DATA STRING[50] (Player) IN base;
+
+teamPlayer = DATA Team (Player);
+
+connect = DATA Team (Player) NONULL DELETE;
+
+date 'Date' = DATA DATE (Game);
+hostTeam = DATA Team (Game);
+guestTeam = DATA Team (Game);
+hostTeamName 'Hosts' (Game game) = name(hostTeam(game));
+guestTeamName 'Guests' (Game game) = name(guestTeam(game));
+
+played (Team t, Game g) = hostTeam(g) = t OR guestTeam(g) = t;
+
+CONSTRAINT hostTeam(Game team) = guestTeam(team) CHECKED BY hostTeam, guestTeam MESSAGE 'Host and guest teams must be different';
+
+hostGoals 'H goals' = DATA INTEGER (Game);
+guestGoals 'G goals' = DATA INTEGER (Game);
+
+CONSTRAINT hostGoals(Game game) = guestGoals(game) MESSAGE 'The game cannot end in a draw';
+
+winner(Game game) = IF hostGoals(game) > guestGoals(game)
+                    THEN hostTeam(game)
+                    ELSE guestTeam(game);
+
+looser(Game game) = IF hostGoals(game) > guestGoals(game)
+                    THEN guestTeam(game)
+                    ELSE hostTeam(game);
+
+CLASS GameResult 'G/R' {
+    win 'W',
+    winOT 'LO',
+    winSO 'LB'
+}
+
+resultName 'Name' (GameResult game) = staticCaption(game) IF game IS GameResult IN base;
+
+userResult = DATA GameResult (Game);
+result (Game game) = OVERRIDE userResult(game),
+    (GameResult.win IF ((hostGoals(game) (-) guestGoals(game)) > 1 OR (guestGoals(game) (-) hostGoals(game)) > 1));
+resultName 'G/R' (Game game) = resultName(result(game));
+
+CONSTRAINT ((hostGoals(Game game) (-) guestGoals(game)) > 1 OR (hostGoals(game) (-) guestGoals(game)) < -1) AND userResult(game)
+    MESSAGE 'The result of the game is determined automatically';
+
+CONSTRAINT ((hostGoals(Game game) (-) guestGoals(game)) < 2 AND (hostGoals(game) (-) guestGoals(game)) > -2) AND NOT userResult(game)
+    MESSAGE 'Specify the result of the game';
+
+hostGamesPlayed = GROUP SUM 1 BY hostTeam(Game game);
+guestGamesPlayed = GROUP SUM 1 BY guestTeam(Game game);
+gamesPlayed 'G' (Team team) = hostGamesPlayed(team) (+) guestGamesPlayed(team);
+
+gamesWonBy(Team team, GameResult type) = OVERRIDE [GROUP SUM 1 BY winner(Game game), result(game)](team, type), 0;
+
+gamesWon 'W' (Team team) = gamesWonBy(team, GameResult.win);
+gamesWonOT 'WO' (Team team) = gamesWonBy(team, GameResult.winOT);
+gamesWonSO 'WB' (Team team) = gamesWonBy(team, GameResult.winSO);
+
+gamesLostBy(Team team, GameResult type) = OVERRIDE [GROUP SUM 1 BY looser(Game game), result(game)](team, type), 0;
+
+gamesLost 'L' (Team team) = gamesLostBy(team, GameResult.win);
+gamesLostOT 'LO' (Team team) = gamesLostBy(team, GameResult.winOT);
+gamesLostSO 'LB' (Team team) = gamesLostBy(team, GameResult.winSO);
+
+points 'Points' (Team team) = gamesWon(team) * 3 + (gamesWonSO(team) + gamesWonOT(team)) * 2 + gamesLostOT(team) + gamesLostSO(team);
+
+hostGoalsScored = GROUP SUM hostGoals(Game game) BY hostTeam(game);
+guestGoalsScored = GROUP SUM guestGoals(Game game) BY guestTeam(game);
+goalsScored 'Scored goals' (Team team) = OVERRIDE hostGoalsScored(team) (+) guestGoalsScored(team), 0 IF team IS Team;
+
+hostGoalsConceded = GROUP SUM guestGoals(Game game) BY hostTeam(game);
+guestGoalsConceded = GROUP SUM hostGoals(Game game) BY guestTeam(game);
+goalsConceded 'Conceded goals' (Team team) = OVERRIDE hostGoalsConceded(team) (+) guestGoalsConceded(team), 0 IF team IS Team;
+
+place 'Rank' (Team team) = PARTITION SUM 1 ORDER DESC points(team), gamesWon(team), gamesWonOT(team), gamesWonSO(team),
+                                               (OVERRIDE goalsScored(team) (-) goalsConceded(team), 0), goalsScored(team);                                                  
+                                               
+playerGoals 'Player goals' = DATA INTEGER (Player, Game);
+
+scoredGoals 'Scored goals' (Player player) = GROUP SUM playerGoals(player, Game game); 
+
+
+forward 'Forward' (Player player) =  PARTITION SUM 1 ORDER DESC scoredGoals(player);
+                                     
+FORM MainForm 'Score table'
+    OBJECTS game = Game
+    PROPERTIES(game) date, hostTeamName, hostGoals, guestGoals, guestTeamName, resultName
+    PROPERTIES(game) NEWSESSION NEW, EDIT, DELETE
+;
+
+EXTEND FORM MainForm
+    OBJECTS team = Team
+    PROPERTIES(team) place, name, gamesPlayed, gamesWon, gamesWonOT, gamesWonSO,
+                     gamesLostSO, gamesLostOT, gamesLost, goalsScored, goalsConceded, points
+                     PROPERTIES(team) NEWSESSION NEW, EDIT, DELETE
+    ORDERS place(team)
+    OBJECTS player = Player
+    PROPERTIES READONLY forward(player), playerName(player), scoredGoals(player)
+    ORDERS forward(player)
+
+;
+
+FORM MainFormSingle 'Score table'
+    OBJECTS game = Game
+    PROPERTIES(game) date, hostTeamName, hostGoals, guestGoals, guestTeamName, resultName, NEW, DELETE
+
+    OBJECTS team = Team
+    PROPERTIES(team) place, name, gamesPlayed, gamesWon, gamesWonOT, gamesWonSO,
+                     gamesLostSO, gamesLostOT, gamesLost, goalsScored, goalsConceded, points, NEW, EDIT, DELETE        
+    ORDERS place(team)
+;
+
+FORM team 'Team'
+    OBJECTS team = Team PANEL 
+    PROPERTIES(team) name
+    
+    OBJECTS player = Player
+    PROPERTIES(player) playerName, NEW, DELETE GRID
+    FILTERS connect(player) = team
+    EDIT Team OBJECT team
+;
+
+FORM game 'Game'
+    OBJECTS game = Game PANEL 
+    PROPERTIES(game) date, hostTeamName, hostGoals, guestGoals, guestTeamName, resultName
+    EDIT Game OBJECT game
+       
+        OBJECTS team = Team  
+        PROPERTIES(team) name
+
+        OBJECTS player = Player
+        
+        FILTERS connect(player) = team
+        FILTERS played(team, game)
+        
+        PROPERTIES playerName(player), playerGoals(player, game)  
+
+;
+
+
+NAVIGATOR {
+    NEW MainForm FIRST;
+}
+
+CLASS Event;
+date = DATA DATE (Event);
+date(Event e) <- currentDate() WHEN SET(e IS Event);
+title = DATA STRING (Event);
+title(Event e) <- 'Event' + e WHEN SET(e IS Event);
+
+FORM calendar
+    OBJECTS e=Event CUSTOM 'calendar'
+    PROPERTIES (e) date, title, NEW, EDIT, DELETE
+;
+
+NAVIGATOR {
+    NEW calendar;
+}
